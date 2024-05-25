@@ -34,9 +34,12 @@ class CalendarsController < ApplicationController
       plans.each do |plan|
         today_plans.push(plan.plan) if plan.date == @todays_date + x
       end
-      days = { month: (@todays_date + x).month, date: (@todays_date + x).day, plans: today_plans }
-      @week_days.push(days)
-    end
 
-  end
-end
+      wday_num = (@todays_date + x).wday  # 今日から数えた曜日の数値を取得
+      wday_index = wday_num % 7  # 配列wdaysの添字を計算するために7で割った余りを取得
+
+      days = { month: (@todays_date + x).month, date: (@todays_date + x).day, plans: today_plans, wday: wdays[wday_index] }
+      @week_days.push(days)
+    end  # 7.times do の終わり
+  end  # def getWeek の終わり
+end  # class CalendarsController の終わり
