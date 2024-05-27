@@ -36,9 +36,8 @@ class CalendarsController < ApplicationController
       end
 
       wday_num = (@todays_date + x).wday  # 今日から数えた曜日の数値を取得
-      wday_index = wday_num % 7  # 配列wdaysの添字を計算するために7で割った余りを取得
 
-      days = { month: (@todays_date + x).month, date: (@todays_date + x).day, plans: today_plans, wday: wdays[wday_index] }
+      days = { month: (@todays_date + x).month, date: (@todays_date + x).day, plans: today_plans, wday: wdays[wday_num] }
       @week_days.push(days)
     end  # 7.times do の終わり
   end  # def getWeek の終わり
